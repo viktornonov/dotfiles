@@ -33,6 +33,8 @@ Plugin 'FuzzyFinder'
 
 Bundle 'ctrlp.vim'
 
+Bundle 'fakeclip'
+
 Bundle "bling/vim-airline"
 
 call vundle#end()
@@ -63,14 +65,17 @@ nmap <Space> :
 :set foldlevel=99
 
 :set number
-:colorscheme candy
+:colorscheme kolor
 :highlight LineNr ctermfg=darkgrey
 :set guioptions-=L
 :set guioptions-=r
 
+" copy/paste
+map <C-c> "+y
 "highlight trailing spaces
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
 :set colorcolumn=80
+:set t_Co=256
 
 
