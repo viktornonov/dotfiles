@@ -1,4 +1,4 @@
-runtime! debian.vim
+runtime! debian.vim "TODO do I need that? check what's in there
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the
 " following enables syntax highlighting by default.
