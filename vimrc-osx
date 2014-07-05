@@ -33,7 +33,6 @@ Plugin 'FuzzyFinder'
 
 Bundle 'ctrlp.vim'
 
-
 Bundle "bling/vim-airline"
 
 call vundle#end()
@@ -72,4 +71,6 @@ nmap <Space> :
 "highlight trailing spaces
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
+:set colorcolumn=80
+
 
