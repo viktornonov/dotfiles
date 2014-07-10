@@ -2,6 +2,7 @@
   st = status
   ci = commit
   co = checkout
+  pu = pull upstream master
 [user]
 	name = Viktor Nonov
 	email = vnonov@gmail.com
