@@ -1,0 +1,59 @@
+source $VIMRUNTIME/mswin.vim
+behave mswin
+imap jk <Esc>
+syntax on
+set nocompatible
+filetype off
+
+set guifont=Monaco:h13
+
+call pathogen#infect()
+call pathogen#helptags()
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+Plugin 'gmarik/Vundle'
+" plugins
+Bundle "jQuery"
+Bundle "http://github.com/gmarik/snipmate.vim.git"
+
+Plugin 'tpope/vim-figutive'
+Plugin 'The-NERD-tree'
+Plugin 'L9'
+
+Plugin 'FuzzyFinder'
+map ,t :FufFile **/bigpurpledot/BigPurpleDot/**/<CR>
+
+Bundle "git://git.wincent.com/command-t.git"
+let g:CommandTMatchWindowAtTop=1 " show window at the top
+map ,f :CommandT ~/bigpurpledot/BigPurpleDot<CR>
+
+" Bundle 'ctrlp.vim'
+" map ,f :CtrlP ~/bigpurpledot/BigPurpleDot<CR>
+
+Bundle "bling/vim-airline"
+
+call vundle#end()
+filetype plugin indent on
+
+:set tabstop=2
+:set shiftwidth=2
+:set expandtab
+:set hlsearch
+nnoremap <F3> :set hlsearch!<CR>
+
+set backupdir=~/tmp
+
+map <F2> :NERDTreeToggle<CR>
+nmap <Space> :
+
+:set encoding=utf-8
+:set fileencodings=utf-8
+:set foldmethod=indent
+:set foldlevel=99
+
+:set number
+:colorscheme candy
+:set guioptions-=L
+:set guioptions-=r
+
