@@ -1,4 +1,3 @@
-#bashrc
 
 [[ -s "$HOME/.profile" ]] && source "$HOME/.profile" # Load the default .profile
 
@@ -12,4 +11,6 @@ source ~/.git-completion.bash
 
 export PS1='\[\033[01;34m\]\w\[\033[00m\]\$ '
 export CLICOLOR=1
+export LSCOLORS=gafxcxdxbxegedabagacad
+export TERM=xterm-256color
 
