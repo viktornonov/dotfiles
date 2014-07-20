@@ -1,5 +1,3 @@
-source $VIMRUNTIME/mswin.vim
-behave mswin
 imap jk <Esc>
 syntax on
 set nocompatible
@@ -26,11 +24,7 @@ Plugin 'L9'
 
 Plugin 'FuzzyFinder'
 
-Bundle "git://git.wincent.com/command-t.git"
-let g:CommandTMatchWindowAtTop=1 " show window at the top
-let g:CommandTMaxHeight=5 " show window at the top
-
-" Bundle 'ctrlp.vim'
+Bundle 'ctrlp.vim'
 
 Bundle "bling/vim-airline"
 
@@ -55,6 +49,7 @@ nmap <Space> :
 
 :set number
 :colorscheme candy
+:highlight LineNr ctermfg=darkgrey
 :set guioptions-=L
 :set guioptions-=r
 
