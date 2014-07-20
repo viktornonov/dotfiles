@@ -17,19 +17,20 @@ Plugin 'gmarik/Vundle'
 Bundle "jQuery"
 Bundle "http://github.com/gmarik/snipmate.vim.git"
 
-Plugin 'tpope/vim-figutive'
+Bundle "kchmck/vim-coffee-script"
+Bundle 'tpope/vim-rails'
+
+Plugin 'tpope/vim-fugitive'
 Plugin 'The-NERD-tree'
 Plugin 'L9'
 
 Plugin 'FuzzyFinder'
-map ,t :FufFile **/bigpurpledot/BigPurpleDot/**/<CR>
 
 Bundle "git://git.wincent.com/command-t.git"
 let g:CommandTMatchWindowAtTop=1 " show window at the top
-map ,f :CommandT ~/bigpurpledot/BigPurpleDot<CR>
+let g:CommandTMaxHeight=5 " show window at the top
 
 " Bundle 'ctrlp.vim'
-" map ,f :CtrlP ~/bigpurpledot/BigPurpleDot<CR>
 
 Bundle "bling/vim-airline"
 
