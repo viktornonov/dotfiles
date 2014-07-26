@@ -14,3 +14,5 @@ export CLICOLOR=1
 export LSCOLORS=gafxcxdxbxegedabagacad
 export TERM=xterm-256color
 
+# aliases
+alias gr='grep -r'
