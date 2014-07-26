@@ -1,3 +1,5 @@
+"source $VIMRUNTIME/mswin.vim
+"behave mswin
 imap jk <Esc>
 syntax on
 set nocompatible
@@ -24,7 +26,13 @@ Plugin 'L9'
 
 Plugin 'FuzzyFinder'
 
+" Bundle "git://git.wincent.com/command-t.git"
+" Bundle "Command-T"
+"let g:CommandTMatchWindowAtTop=1 " show window at the top
+"let g:CommandTMaxHeight=5 " show window at the top
+
 Bundle 'ctrlp.vim'
+
 
 Bundle "bling/vim-airline"
 
@@ -52,4 +60,8 @@ nmap <Space> :
 :highlight LineNr ctermfg=darkgrey
 :set guioptions-=L
 :set guioptions-=r
+
+"highlight trailing spaces
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
 
