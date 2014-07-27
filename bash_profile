@@ -16,3 +16,4 @@ export TERM=xterm-256color
 
 # aliases
 alias gr='grep -r'
+source ~/.alias-directories.bash
