@@ -38,6 +38,13 @@ Bundle "bling/vim-airline"
 
 call vundle#end()
 filetype plugin indent on
+" tweaking airline
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_branch_prefix= 'Ϟ'
+let g:airline_readonly_symbol = 'X'
 
 :set tabstop=2
 :set shiftwidth=2
@@ -45,6 +52,7 @@ filetype plugin indent on
 :set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
+set laststatus=2 " always show status line
 set backupdir=~/tmp
 
 map <F2> :NERDTreeToggle<CR>
