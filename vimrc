@@ -61,7 +61,7 @@ if has("gui_running")
 endif
 
 " remove toolbars and menus
-:set go= 
+:set go=
 
 " key remappings
 :imap jk <Esc>
