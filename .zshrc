@@ -51,7 +51,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/Users/viktor/.rvm/gems/ruby-2.1.1/bin:/Users/viktor/.rvm/gems/ruby-2.1.1@global/bin:/Users/viktor/.rvm/rubies/ruby-2.1.1/bin:/Users/viktor/.rvm/bin:/Users/viktor/.rvm/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -80,6 +79,31 @@ export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/local/bin:/opt/lo
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.alias-directories.bash
-alias gr="grep -r"
+alias gr="grep -rn"
+alias rdmt="rake db:migrate; rake db:migrate RAILS_ENV=test"
+alias rdm="rake db:migrate"
+alias rdbrt="rake db:rollback; rake db:rollback RAILS_ENV=test"
+alias rdbr="rake db:rollback"
+alias zshrc="vim ~/.zshrc"
+alias last-mig="vim ./db/migrate/\$(ls db/migrate | tail -n 1)"
+alias show-todos="grep -rn --exclude='.\*' --exclude-dir=tmp --exclude-dir=.git --exclude-dir=.bundle 'TODO\[VN\]' ."
+alias vim="/usr/local/Cellar/vim/7.4.903/bin/vim"
+alias gdc="git diff --cached"
+export BUNDLER_EDITOR=vim
 TranslateWheelToCursor=on
 DisableWheelToCursorByCtrl=on
+ctags=/usr/local/bin/ctags
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/bin" # Add home bin
+export PATH="$PATH:$HOME/Library/Python/3.5/bin" # Add python bin
+
+#make man pages more readable
+export MANWIDTH=80
+
+# Custom command prompt
+function prompt_char {
+  if [ $UID -eq 0 ]; then echo "#"; else echo $; fi
+}
+PS1='%{$fg[green]%}[%{$fg[magenta]%}%2c%{$fg[green]%}]%{$fg[cyan]%}$(prompt_char) %{$reset_color%}'
+
