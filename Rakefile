@@ -24,6 +24,9 @@ task :install do
       zshrc.puts "export POWERLINE_LOC=\"#{powerline_loc}\""
       zshrc.puts "export PATH=\"$PATH:$POWERLINE_LOC/../../../bin/\""
     end
+
+    #try symlink
+    `cp -f ~/github/dotfiles/powerline-default.json #{powerline_loc}/powerfile/config_files/themes/tmux/default.json`
   else
     puts "powerline-status not found"
   end
