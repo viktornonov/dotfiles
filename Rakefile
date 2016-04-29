@@ -30,8 +30,13 @@ task :install do
 
   install_fonts
 
+  puts "import iterm2 settings"
+  #TODO[VN] try symlink
   `cp -f ~/github/dotfiles/settings/com.googlecode.iterm2.plist ~/Library/Preferences/`
   `defaults read com.googlecode.iterm2`
+
+  puts "import terminal.app settings"
+  `~/settings/solarized-custom.terminal`
 
   puts "===================="
   puts "===== Finished ====="
