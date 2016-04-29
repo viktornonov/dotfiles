@@ -18,7 +18,7 @@ task :install do
   end
 
   #powerline modifcation
-  powerline_loc = `pip3 show powerline-config | grep Location | awk '{print $2}'`
+  powerline_loc = `pip3 show powerline-status | grep Location | awk '{print $2}'`.strip
   if powerline_loc != ""
     File.open("#{Dir.home}/.zshrc", 'a') do |zshrc|
       zshrc.puts "export POWERLINE_LOC=\"#{powerline_loc}\""
