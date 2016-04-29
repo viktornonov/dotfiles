@@ -26,7 +26,7 @@ task :install do
     end
 
     #try symlink
-    `cp -f ~/github/dotfiles/powerline-default.json #{powerline_loc}/powerfile/config_files/themes/tmux/default.json`
+    `cp -f ~/github/dotfiles/settings/powerline-default.json #{powerline_loc}/powerfile/config_files/themes/tmux/default.json`
   else
     puts "powerline-status not found"
   end
