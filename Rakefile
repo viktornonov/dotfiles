@@ -9,6 +9,8 @@ DOTFILES = {
   ".tmux.conf" => Dir.home,
 }
 
+DOTFILES_DIR = "#{Dir.home}/github/dotfiles"
+
 desc "Install dotfiles"
 task :install do
   puts "Just starting"
@@ -25,26 +27,31 @@ task :install do
       zshrc.puts "export PATH=\"$PATH:$POWERLINE_LOC/../../../bin/\""
     end
 
-    #try symlink
-    `cp -f ~/github/dotfiles/settings/powerline-default.json #{powerline_loc}/powerline/config_files/themes/tmux/default.json`
+    `ln -nfs #{DOTFILES_DIR}/settings/powerline-default.json #{powerline_loc}/powerline/config_files/themes/tmux/default.json`
   else
     puts "powerline-status not found"
   end
 
   install_fonts
 
+  puts "Install vundle"
   `mkdir -p ~/.vim/bundle`
   `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+  puts "====================="
+
+  puts "Install vim color scheme"
   `mkdir -p ~/.vim/colors`
-  `cp -f ~/github/dotfiles/vim/kolor.vim ~/.vim/colors/kolor.vim`
+  `cp -f #{DOTFILES_DIR}/vim/kolor.vim ~/.vim/colors/kolor.vim`
+  puts "====================="
 
   puts "import iterm2 settings"
-  #TODO[VN] try symlink
-  `cp -f ~/github/dotfiles/settings/com.googlecode.iterm2.plist ~/Library/Preferences/`
+  `cp -f #{DOTFILES_DIR}/settings/com.googlecode.iterm2.plist ~/Library/Preferences/`
   `defaults read com.googlecode.iterm2`
+  puts "===================="
 
   puts "import terminal.app settings"
-  `open ~/github/dotfiles/settings/solarized-custom.terminal`
+  `open #{DOTFILES_DIR}/settings/solarized-custom.terminal`
+  puts "===================="
 
   puts "===================="
   puts "===== Finished ====="
@@ -53,7 +60,7 @@ end
 
 def symlink_dotfiles(file, directory)
   puts "Processing #{file}"
-  source = "#{Dir.home}/github/dotfiles/#{file}"
+  source = "#{DOTFILES_DIR}/#{file}"
   target = "#{directory}/#{file}"
 
   puts "Source: #{source}"
@@ -62,7 +69,7 @@ def symlink_dotfiles(file, directory)
   if File.exists?(target) && (!File.symlink?(target) ||
                               (File.symlink?(target) && File.readlink(target) != source))
     puts "[Overwriting] #{target}...backing up at #{target}.bak..."
-    `mv "#{directory}/.#{file}" "#{directory}/.#{file}.bak"`
+    `mv "#{directory}/#{file}" "#{directory}/#{file}.bak"`
   end
 
   `ln -nfs "#{source}" "#{target}"`
@@ -75,6 +82,6 @@ def install_fonts
   puts "======================================================"
   puts "Installing patched fonts for tmux Powerline."
   puts "======================================================"
-  `cp -f $HOME/github/dotfiles/fonts/* $HOME/Library/Fonts ` if RUBY_PLATFORM.downcase.include?("darwin")
+  `cp -f #{DOTFILES_DIR}/fonts/* $HOME/Library/Fonts ` if RUBY_PLATFORM.downcase.include?("darwin")
   puts
 end
