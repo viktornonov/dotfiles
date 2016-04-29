@@ -103,9 +103,8 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
-sudo ln -s $HOME/github/osx/space.jpg /System/Library/CoreServices/DefaultDesktop.jpg
+sudo ln -s $HOME/github/dotfiles/osx/space.jpg /System/Library/CoreServices/DefaultDesktop.jpg
+#osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$HOME/github/dotfiles/osx/space.jpg"'
 
 ###############################################################################
 # SSD-specific tweaks                                                         #
@@ -401,7 +400,7 @@ tell application "Terminal"
 	(* Open the custom theme so that it gets added to the list
 	   of available terminal themes (note: this will open two
 	   additional terminal windows). *)
-	do shell script "open '$HOME/github/osx/" & themeName & ".terminal'"
+	do shell script "open '$HOME/github/dotfiles/osx/" & themeName & ".terminal'"
 
 	(* Wait a little bit to ensure that the custom theme is added. *)
 	delay 1
