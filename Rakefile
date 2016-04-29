@@ -41,7 +41,7 @@ task :install do
   `defaults read com.googlecode.iterm2`
 
   puts "import terminal.app settings"
-  `open ~/settings/solarized-custom.terminal`
+  `open ~/github/dotfiles/settings/solarized-custom.terminal`
 
   puts "===================="
   puts "===== Finished ====="
