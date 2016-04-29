@@ -30,6 +30,9 @@ task :install do
 
   install_fonts
 
+  `cp -f ~/github/dotfiles/settings/com.googlecode.iterm2.plist ~/Library/Preferences/`
+  `defaults read com.googlecode.iterm2`
+
   puts "===================="
   puts "===== Finished ====="
   puts "===================="
