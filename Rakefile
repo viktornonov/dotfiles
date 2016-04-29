@@ -30,6 +30,11 @@ task :install do
 
   install_fonts
 
+  `mkdir -p ~/.vim/bundle`
+  `mkdir -p ~/.vim/colors`
+  `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+  `cp -f ~/github/dotfiles/vim/kolor.vim ~/.vim/kolor.vim`
+
   puts "import iterm2 settings"
   #TODO[VN] try symlink
   `cp -f ~/github/dotfiles/settings/com.googlecode.iterm2.plist ~/Library/Preferences/`
