@@ -107,3 +107,7 @@ function prompt_char {
 }
 PS1='%{$fg[green]%}[%{$fg[magenta]%}%2c%{$fg[green]%}]%{$fg[cyan]%}$(prompt_char) %{$reset_color%}'
 
+export POWERLINE_LOC="/Users/viktor/Library/Python/3.5/lib/python/site-packages"
+export PATH="$PATH:$POWERLINE_LOC/../../../bin/"
+
+
