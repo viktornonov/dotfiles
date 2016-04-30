@@ -17,6 +17,7 @@ brew "mplayer"
 brew "grep"
 brew "openssl"
 brew "python3"
+brew "dark-mode"
 
 cask "gpgtools"
 cask "google-chrome"

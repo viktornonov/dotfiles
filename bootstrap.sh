@@ -56,6 +56,9 @@ elif [ $system = "Darwin" ]; then
   brew tap homebrew/bundle
   mkdir -p ~/github && cd ~/github && git clone https://github.com/viktornonov/dotfiles && cd ./dotfiles && brew bundle
 
+  #enable the dark mode
+  dark-mode dark
+
   #RVM and Ruby install
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   curl -sSL https://get.rvm.io | bash -s stable --ruby
