@@ -67,7 +67,7 @@ elif [ $system = "Darwin" ]; then
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
   chsh -s /usr/local/bin/zsh
 
-  mkdir -p ~/github/dotfiles && rake install
+  cd ~/github/dotfiles && rake install
 
 # keyboard shortcuts osx
 
@@ -77,15 +77,15 @@ elif [ $system = "Darwin" ]; then
 #    installCommonApps;
 #  fi;
 
-  ssh-keygen -b 4096
-  cat ~/.ssh/id_rsa.pub
+  source "~/github/dotfiles/.osx"
+
+  #make solarized theme default in Terminal.app with plistBuddy
+
+
+  #ssh-keygen -b 4096
+  #cat ~/.ssh/id_rsa.pub
 else
   echo "Unknown system ${system}"
   exit 1
 fi
-
-# rake, gem, bundle
-
-# .osx defaults
-#https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 
