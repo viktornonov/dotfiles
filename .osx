@@ -101,11 +101,6 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Disable smart dashes as they’re annoying when typing code
 # defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
-# Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
-# all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
-sudo ln -s $HOME/github/dotfiles/osx/space.jpg /System/Library/CoreServices/DefaultDesktop.jpg
-#osascript -e 'tell application "Finder" to set desktop picture to POSIX file "$HOME/github/dotfiles/osx/space.jpg"'
-
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
@@ -300,10 +295,10 @@ defaults write com.apple.dock minimize-to-application -bool true
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-#defaults write com.apple.dock persistent-apps -array
+defaults write com.apple.dock persistent-apps -array
 
 # Show only open applications in the Dock
-#defaults write com.apple.dock static-only -bool true
+defaults write com.apple.dock static-only -bool true
 
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
@@ -438,6 +433,9 @@ EOD
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+# Make iTerm agent app, so it can be invoked in full screen apps
+defaults write /Applications/iTerm.app/Contents/Info LSUIElement true
 
 ###############################################################################
 # Time Machine                                                                #
