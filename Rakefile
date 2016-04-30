@@ -53,6 +53,11 @@ task :install do
   `open #{DOTFILES_DIR}/settings/solarized-custom.terminal`
   puts "===================="
 
+  puts "set wallpaper"
+  `osascript -e 'tell application "Finder" to set desktop picture to POSIX file "#{DOTFILES_DIR}/settings/space.jpg"'`
+  puts "===================="
+
+
   puts "===================="
   puts "===== Finished ====="
   puts "===================="
