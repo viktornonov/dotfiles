@@ -30,4 +30,5 @@ cask "rescuetime"
 cask "evernote"
 cask "flux"
 cask "vlc"
+cask "dash"
 
