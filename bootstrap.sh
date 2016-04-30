@@ -42,7 +42,7 @@ elif [ $system = "Darwin" ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
   xcode_installed=$(xcode-select -p)
-  if [ $xcode_installed = "/Applications/Xcode.app/Contents/Developer" ]; then
+  if [ $xcode_installed = "/Library/Developer/CommandLineTools" ]; then
     echo "XCode Cmd tools are already installed"
   else
     install_osx_cmdlinetools
@@ -56,8 +56,8 @@ elif [ $system = "Darwin" ]; then
   curl -sSL https://get.rvm.io | bash -s stable --ruby
 
   sudo easy_install pip
-  pip install mps-youtube
-  pip install youtube_dl
+  pip3 install mps-youtube
+  pip3 install youtube_dl
 
   #powerline stuff
   pip3 install --user powerline-config
@@ -77,7 +77,7 @@ elif [ $system = "Darwin" ]; then
 #    installCommonApps;
 #  fi;
 
-  source "~/github/dotfiles/.osx"
+  source "$HOME/github/dotfiles/.osx"
 
   #make solarized theme default in Terminal.app with plistBuddy
 
