@@ -7,6 +7,7 @@ DOTFILES = {
   ".vimrc" => Dir.home,
   ".zshrc" => Dir.home,
   ".tmux.conf" => Dir.home,
+  ".alias-directories.bash" => Dir.home,
 }
 
 DOTFILES_DIR = "#{Dir.home}/github/dotfiles"
