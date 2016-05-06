@@ -46,6 +46,12 @@ elif [ $system = "Darwin" ]; then
   #Install Homebrew
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+  brew_exec=$(which brew)
+  if [ $brew_exec -ne "/usr/local/bin/brew" ]; then
+    echo "brew was not installed"
+    exit -1
+  fi
+
   xcode_installed=$(xcode-select -p)
   if [ $xcode_installed = "/Library/Developer/CommandLineTools" ]; then
     echo "XCode Cmd tools are already installed"
