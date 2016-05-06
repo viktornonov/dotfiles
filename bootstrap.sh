@@ -18,21 +18,12 @@ function install_osx_cmdlinetools()
           head -n 1 | awk -F"*" '{print $2}' |
           sed -e 's/^ *//' |
           tr -d '\n')
+  if [ -z $PROD ]; then
+    echo "Coulndn't find Command Line Tools in the update list"
+    exit
+  fi
   softwareupdate -i "$PROD" -v;
 }
-
-#function installCommonApps() {
-#  brew cask install google-chrome
-#  brew cask install dropbox
-#  brew cask install iterm2
-#  brew cask install slack
-#  brew cask install skype
-#  brew cask install spectacle
-#  brew cask install awareness
-#  brew cask install rescuetime
-#  brew cask install evernote
-#  brew cask install flux
-#}
 
 ############################################################################
 #                                 START                                    #
@@ -43,24 +34,25 @@ if [ $system = "Linux" ]; then
   #TODO[VN] finish the linux part
 elif [ $system = "Darwin" ]; then
   echo "Darwin"
-  #Install Homebrew
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-  brew_exec=$(which brew)
-  if [ $brew_exec -ne "/usr/local/bin/brew" ]; then
-    echo "brew was not installed"
-    exit -1
-  fi
-
-  xcode_installed=$(xcode-select -p)
-  if [ $xcode_installed = "/Library/Developer/CommandLineTools" ]; then
+  echo "Looking for Command Line Tools"
+  if [ -d "/Library/Developer/CommandLineTools" ]; then
     echo "XCode Cmd tools are already installed"
   else
     install_osx_cmdlinetools
   fi
 
+  #Install Homebrew
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+  if [ ! -f "/usr/local/bin/brew" ]; then
+    echo "brew was not installed"
+    exit
+  fi
+
   brew tap homebrew/bundle
-  mkdir -p ~/github && cd ~/github && git clone https://github.com/viktornonov/dotfiles && cd ./dotfiles && brew bundle
+  mkdir -p ~/github && cd ~/github && git clone https://github.com/viktornonov/dotfiles
+  cd ~/github/dotfiles && brew bundle
 
   #enable the dark mode
   dark-mode dark
@@ -70,13 +62,14 @@ elif [ $system = "Darwin" ]; then
   curl -sSL https://get.rvm.io | bash -s stable --ruby
 
   sudo easy_install pip
+  sudo pip3 install --upgrade pip
   pip3 install mps-youtube
   pip3 install youtube_dl
 
   #powerline stuff
-  pip3 install --user powerline-config
+  pip3 install --user powerline-status
   pip3 install netifaces
-  pip3 install psutils
+  pip3 install psutil
 
   curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
   chsh -s /usr/local/bin/zsh
@@ -85,19 +78,18 @@ elif [ $system = "Darwin" ]; then
 
 # keyboard shortcuts osx
 
-#  read -p "This will install common apps like chrome, skype, slack etc. Are you sure? (y/n) " -n 1;
-#  echo "";
-#  if [[ $REPLY =~ ^[Yy]$ ]]; then
-#    installCommonApps;
-#  fi;
-
   source "$HOME/github/dotfiles/.osx"
 
-  #make solarized theme default in Terminal.app with plistBuddy
+  #iTerm shows error when it starts
 
+  #TODO[VN] start the apps
+  # add flux and awareness plists
 
-  #ssh-keygen -b 4096
-  #cat ~/.ssh/id_rsa.pub
+  #awareness
+  #spectacle
+  #iterm2
+  #flux
+  #rescuetime
 else
   echo "Unknown system ${system}"
   exit 1
