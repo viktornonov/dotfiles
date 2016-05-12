@@ -64,6 +64,16 @@ task :install do
   puts "===================="
 end
 
+desc "Sync dotfiles"
+task :sync do
+  puts "Syncing dotfiles"
+  #check if some of the files are edited and prompt for push
+  #otherwise do
+  `cd ~/github/dotfiles && git pull origin master`
+  #see if all the fonts are installed
+  #restart the services
+end
+
 def symlink_dotfiles(file, directory)
   puts "Processing #{file}"
   source = "#{DOTFILES_DIR}/#{file}"
