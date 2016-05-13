@@ -16,6 +16,8 @@ desc "Install dotfiles"
 task :install do
   puts "Just starting"
 
+  #https://spin.atomicobject.com/2014/12/26/manage-dotfiles-gnu-stow/
+  #check if GNU stow is better solution
   DOTFILES.each_pair do |file, directory|
     symlink_dotfiles(file, directory)
   end
