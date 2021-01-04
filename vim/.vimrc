@@ -1,11 +1,25 @@
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
 imap jk <Esc>
+
+"hardcore
+map <Left> <NOP>
+map <Up> <NOP>
+map <Right> <NOP>
+map <Down> <NOP>
+imap <Left> <NOP>
+imap <Up> <NOP>
+imap <Right> <NOP>
+imap <Down> <NOP>
+
+nmap h <NOP>
+nmap l <NOP>
+
 syntax on
 set nocompatible
 filetype off
 
 set guifont=Monaco:h13
+" indentation shit
+set cindent
 
 command -bar Hex call ToggleHex()
 
@@ -49,6 +63,14 @@ function ToggleHex()
   let &modifiable=l:oldmodifiable
 endfunction
 
+"C/C++ custom functions
+map gc :call CompileCplus()<CR>
+
+function CompileCplus()
+  !clear && echo '------------------' && g++ -std=c++11 -Wall % && ./a.out
+endfunction
+
+
 "this was breaking the vim 7.4 so deleted it not sure if it is pathogen or
 "some some of the plugins that it uses
 "call pathogen#infect()
@@ -56,7 +78,7 @@ endfunction
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-Plugin 'gmarik/Vundle'
+Plugin 'gmarik/Vundle.vim'
 
 Plugin 'MarcWeber/vim-addon-mw-utils' "needed by snipMate
 Plugin 'tomtom/tlib_vim' " needed by snipMate
@@ -72,16 +94,22 @@ Plugin 'The-NERD-tree' "the file tree on the left
 Plugin 'syntastic' "syntax checking for vim
 Plugin 'L9' "utility functions and commands
 Plugin 'jamessan/vim-gnupg' "plugin for editing gnupg
+Plugin 'Raimondi/delimitMate' "plugin for autoclosing parenthesis and quotes
 
-Plugin 'ctrlp.vim'
+Plugin 'vim-javascript'
 
-Plugin 'fakeclip' "pseudo clipboard (not sure if I use it)
-Plugin 'bling/vim-airline' "line at the botton
+Plugin 'git@github.com:kannokanno/previm.git'
+Plugin 'fakeclip' "pseudo clipboard that is used with the option set clipboard=unnamed below
+Plugin 'bling/vim-airline' "line at the bottom
+Plugin 'easymotion'
 
 call vundle#end()
 filetype plugin indent on
-
-" CtrlP shortcuts
+" fuzzy search
+set rtp+=/usr/local/opt/fzf
+let g:fzf_layout = { 'down': '~20%' }
+let currentDir = getcwd()
+map ,f :FZF .<CR>
 
 " tweaking airline
 let g:airline_left_sep = ''
@@ -99,6 +127,10 @@ autocmd FileType php :setlocal sw=4 ts=4 sts=4
 autocmd FileType phtml :setlocal sw=4 ts=4 sts=4
 autocmd FileType c :setlocal sw=4 ts=4 sts=4
 autocmd FileType cpp :setlocal sw=4 ts=4 sts=4
+autocmd FileType java :setlocal sw=4 ts=4 sts=4
+autocmd FileType crontab setlocal nobackup nowritebackup
+autocmd FileType ruby setlocal smartindent sw=2 ts=2 et cinwords=if,else,for,while,try,except,finally,def,class,describe,context,it
+
 :set hlsearch
 nnoremap <F3> :set hlsearch!<CR>
 
@@ -106,12 +138,15 @@ set laststatus=2 " always show status line
 set backupdir=~/tmp
 
 map <F2> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
 nmap <Space> :
 
 :set encoding=utf-8
 :set fileencodings=utf-8
 :set foldmethod=indent
 :set foldlevel=99
+:set foldlevelstart=1
 
 :set number
 :colorscheme kolor
@@ -120,14 +155,48 @@ nmap <Space> :
 :set guioptions-=r
 
 " copy/paste
+" does not work under tmux
 map <C-c> "+y
+map <C-e> $
+map <C-a> ^
+"<C-r><C-o> paste content of the buffer with the original indentation, which
+"is way faster
+imap <C-v> <C-r><C-o>+
+
 "highlight trailing spaces
 :highlight ExtraWhitespace ctermbg=red guibg=red
 :match ExtraWhitespace /\s\+$/
 :set colorcolumn=80
 :set t_Co=256
 
+set tags=.git/tags
+
 "ctags
 "<Esc> is the option key (set Option as Esc+ in the terminal profile)
-map <Esc>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+":map <Esc>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+
+"cscope
+
+":cscope add .git/cscope.out
+:map <Esc>p :cscope find c <cword><CR>
+
+"syntastic
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_jslint_args = "--white --nomen --browser --devel --windows --predef jQuery --predef $ --todo"
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
+
+" Wrap visual selection in an LaTex tag.
+vmap <Leader>w <Esc>:call VisualLatexWrap()<CR>
+function! VisualLatexWrap()
+  let tag = '$'
+  normal `>
+  if &selection == 'exclusive'
+    exe "normal i[/".tag."]"
+  else
+    exe "normal a[/".tag."]"
+  endif
+  normal `<
+  exe "normal i[".tag."]"
+  normal `<
+endfunction
 
