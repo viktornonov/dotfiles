@@ -144,7 +144,10 @@
 ;; Helm
 (use-package helm)
 (require 'helm-config)
-(setq helm-split-window-in-side-p t)
+(setq helm-split-window-in-side-p t
+      helm-candidate-number-limit 30)
+
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
 
 (helm-mode 1)
 
