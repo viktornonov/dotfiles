@@ -101,7 +101,7 @@ Plugin 'vim-javascript'
 Plugin 'git@github.com:kannokanno/previm.git'
 Plugin 'fakeclip' "pseudo clipboard that is used with the option set clipboard=unnamed below
 Plugin 'bling/vim-airline' "line at the bottom
-Plugin 'easymotion'
+Plugin 'easymotion/vim-easymotion'
 
 call vundle#end()
 filetype plugin indent on
@@ -200,3 +200,4 @@ function! VisualLatexWrap()
   normal `<
 endfunction
 
+nmap ls <Plug>(easymotion-sn)
