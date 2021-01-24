@@ -1,0 +1,11 @@
+imap jk <Esc>
+set showmode
+
+set easymotion
+nmap ls :action AceAction<CR>
+imap <C-n> <Esc>:action HippieCompletion<CR>a
+
+nnoremap ,f :action GotoFile<CR>
+nnoremap ,s :action FindInPath<CR>
+command Gblame action Annotate
+nmap <Space> :
