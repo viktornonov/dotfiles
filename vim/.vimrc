@@ -136,6 +136,7 @@ nnoremap <F3> :set hlsearch!<CR>
 
 set laststatus=2 " always show status line
 set backupdir=~/tmp
+set directory^=$HOME/tmp// "// at the end makes Vim use the absolute path to the file to create the swap file
 
 map <F2> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
