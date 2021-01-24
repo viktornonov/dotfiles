@@ -47,7 +47,7 @@ TranslateWheelToCursor=on
 DisableWheelToCursorByCtrl=on
 ctags=/usr/local/bin/ctags
 
-export PATH="$PATH:$HOME/.rvm/bin:$HOME/bin:$HOME/Library/Python/3.5/bin"
+export PATH="/usr/local/bin:$PATH:$HOME/.rvm/bin:$HOME/bin"
 
 #make man pages more readable
 export MANWIDTH=80
@@ -105,7 +105,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 
-HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Python environment managing with Direnv (Works similarly to rvm's .ruby-version .ruby-gemset)
 # the follwoing is result of eval $(direnv hook zsh)
