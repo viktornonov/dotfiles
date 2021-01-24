@@ -17,7 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov fzf exec-path-from-shell latex-preview-pane markdown-mode))
+   '(ace-jump-mode xclip helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov fzf exec-path-from-shell latex-preview-pane markdown-mode))
  '(tool-bar-mode nil))
 (setq org-M-RET-may-split-line nil)
 
@@ -58,10 +58,14 @@
 (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup/")))
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosave/" t)))
 
+;; Remove startup screen and messages
+(setq-default inhibit-startup-screen t)
+(setq-default inhibit-splash-screen t)
+(setq-default inhibit-startup-message t)
+
 ;; some *scratch* configuration
-(setq initial-major-mode 'markdown-mode)
-(setq initial-scratch-message "\
-# Notes on ")
+(setq initial-major-mode 'text-mode)
+(setq initial-scratch-message "")
 
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
@@ -160,3 +164,20 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; TODO helm-ag
+
+;; ace-jump (throws cl deprecation warning)
+(use-package ace-jump-mode)
+(define-key evil-normal-state-map (kbd "ls") 'ace-jump-char-mode)
+
+;; Enable copy-paste behavior in terminal emacs (https://github.com/noctuid/evil-guide)
+(use-package xclip)
+(defun noct:conditionally-toggle-xclip-mode ()
+   (if (display-graphic-p)
+      (if (bound-and-true-p xclip-mode)
+         (xclip-mode -1))
+      (xclip-mode)))
+
+(noct:conditionally-toggle-xclip-mode)
+
+(add-hook 'focus-in-hook
+           #'noct:conditionally-toggle-xclip-mode)
