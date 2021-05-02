@@ -100,7 +100,7 @@
  '(org-level-1 ((t (:inherit outline-1 :foreground "light green" :height 1.5))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "turquoise1" :height 1.2)))))
 
-(global-set-key (kbd "C-l") 'fzf)
+(define-key evil-normal-state-map (kbd ",f") 'fzf)
 ;;(setq debug-on-error nil)
 
 ;; read epub with Emacs
@@ -122,8 +122,7 @@
 
 (eval-after-load 'evil-maps
   '(progn
-     (define-key evil-motion-state-map (kbd "SPC") 'evil-ex)) ;; remap : to SPC
-  )
+     (define-key evil-motion-state-map (kbd "SPC") 'evil-ex))) ;; remap : to SPC
 
 ;; Understand more about the commands
 (use-package command-log-mode)
@@ -161,9 +160,7 @@
 (global-set-key (kbd "C-s") 'helm-occur)
 ;; replace the search with 'helm-
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-;; TODO helm-ag
 
 ;; ace-jump (throws cl deprecation warning)
 (use-package ace-jump-mode)
