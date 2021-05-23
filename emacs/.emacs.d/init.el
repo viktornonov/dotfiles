@@ -119,7 +119,17 @@
  '(org-level-1 ((t (:inherit outline-1 :foreground "light green" :height 1.5))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "turquoise1" :height 1.2)))))
 
-(define-key evil-normal-state-map (kbd ",f") 'fzf)
+(require 'fzf)
+(defun fzf-search ()
+  "custom start session in a project dir."
+  (interactive)
+  (fzf/start "~/" ;; add dir that you want
+             (lambda (x)
+               (let ((f (expand-file-name x "~/"))) ;; TODO remove the repetition of the dir name
+                 (when (file-exists-p f)
+                   (find-file f))))))
+
+(define-key evil-normal-state-map (kbd ",f") 'fzf-search)
 ;;(setq debug-on-error nil)
 
 ;; read epub with Emacs
