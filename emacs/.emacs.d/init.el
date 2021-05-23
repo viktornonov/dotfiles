@@ -17,7 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ace-jump-mode xclip helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov fzf exec-path-from-shell latex-preview-pane markdown-mode))
+   '(ace-jump-mode xclip helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov exec-path-from-shell latex-preview-pane markdown-mode))
  '(tool-bar-mode nil))
 (setq org-M-RET-may-split-line nil)
 
@@ -35,6 +35,25 @@
 ;;              (general-key-dispatch 'self-insert-command
 ;;                :timeout 0.25
 ;;                "k" 'evil-normal-state))
+
+;; org-agenda
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files '("~/Desktop/org-notes/"))
+(setq org-agenda-custom-commands
+      '(("o" "agenda"
+         ((tags "PRIORITY=\"A\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'done 'delegated))
+                 (org-agenda-overriding-header "High-priority:")))
+          (tags "PRIORITY=\"B\""
+                ((org-agenda-skip-function '(org-agenda-skip-entry-if 'done 'delegated))
+                 (org-agenda-overriding-header "Next-priority:")))
+          (tags "TODO=\"\""
+                ((org-agenda-overriding-header "Knowledge")))))))
+
+(add-hook 'org-agenda-mode-hook
+          (lambda ()
+            (local-set-key (kbd "j") 'org-agenda-next-line)
+            (local-set-key (kbd "k") 'org-agenda-previous-line)))
 
 ;; org-mode customizations
 (setq org-todo-keywords
