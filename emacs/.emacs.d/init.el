@@ -223,3 +223,7 @@
 
 (add-hook 'focus-in-hook
            #'noct:conditionally-toggle-xclip-mode)
+
+(define-globalized-minor-mode my-global-outline-minor-mode outline-minor-mode
+                              (lambda () (outline-minor-mode 1)))
+(my-global-outline-minor-mode 1)
