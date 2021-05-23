@@ -193,7 +193,23 @@
 
 ;; ace-jump (throws cl deprecation warning)
 (use-package ace-jump-mode)
-(define-key evil-normal-state-map (kbd "ls") 'ace-jump-char-mode)
+
+(defun ace-jump-two-chars-mode (&optional query-char query-char-2)
+  "AceJump Two Chars"
+  (interactive)
+  (evil-half-cursor)
+  (setq query-char (or query-char (read-char ">")))
+  (setq query-char-2 (or query-char-2 (read-char (concat ">" (string query-char)))))
+
+  (if (eq (ace-jump-char-category query-char)'other)
+    (error "[AceJump] non-printable char"))
+
+  (setq ace-jump-query-char query-char)
+  (setq ace-jump-current-mode 'ace-jump-char-mode)
+  (ace-jump-do (regexp-quote (concat (char-to-string query-char)
+                                     (char-to-string query-char-2)))))
+
+(define-key evil-normal-state-map (kbd "ls") 'ace-jump-two-chars-mode)
 
 ;; Enable copy-paste behavior in terminal emacs (https://github.com/noctuid/evil-guide)
 (use-package xclip)
