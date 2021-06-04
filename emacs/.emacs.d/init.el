@@ -17,7 +17,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ace-jump-mode xclip helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov exec-path-from-shell latex-preview-pane markdown-mode))
+   '(live-py-mode vue-mode lsp-mode ace-jump-mode xclip helpful which-key command-log-mode xwwp evil csv csv-mode helm color-theme-modern org-bullets melpa-upstream-visit nov exec-path-from-shell latex-preview-pane markdown-mode))
  '(tool-bar-mode nil))
 (setq org-M-RET-may-split-line nil)
 
@@ -76,6 +76,8 @@
 
 (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup/")))
 (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/emacs-autosave/" t)))
+;; prevent lock file creation, because they are messing up Vue server
+(setq create-lockfiles nil)
 
 ;; Remove startup screen and messages
 (setq-default inhibit-startup-screen t)
@@ -156,6 +158,20 @@
 ;; Understand more about the commands
 (use-package command-log-mode)
 ;; show the buffer M-x clm/toggle-command-log-buffer
+
+
+;;lsp-mode related
+
+(use-package lsp-mode
+ :commands lsp)
+
+(use-package vue-mode
+  :mode "\\.vue\\'"
+  :config
+    (add-hook 'vue-mode-hook #'lsp))
+
+
+(use-package live-py-mode)
 
 ;; Show info about shortcut that you're trying to use
 (use-package which-key
